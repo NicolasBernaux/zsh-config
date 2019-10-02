@@ -1,15 +1,17 @@
+USER='nicolasbernaux'
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/nicolas/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
+export ZSH_PLUGINS="/Users/$USER/zsh-plugins"
+export HOME="/Users/$USER/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="spaceship"
-ZSH_THEME="robbyrussell"
 
 
 # Set list of themes to pick from when loading at random
@@ -35,7 +37,7 @@ ZSH_THEME="robbyrussell"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -47,7 +49,7 @@ ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -70,7 +72,14 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting symfony-console git-flow)
+plugins=(
+    git
+    git-flow
+    symfony-console
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-z
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,23 +100,20 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+bindkey "\e\e[D" backward-word
+bindkey "\e\e[C" forward-word
 
 eval $(thefuck --alias)
-# You can use whatever you want as an alias, like for Mondays:
-eval $(thefuck --alias FUCK)
-  # Set Spaceship ZSH as a prompt
-  autoload -U promptinit; promptinit
-  prompt spaceship
-source /Users/nicolas/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+eval $(thefuck --alias fuck)
 
 # ----------------------
 # Aliases
@@ -117,36 +123,20 @@ source /Users/nicolas/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias sf='php bin/console'
 
 # Git
-alias ga='git add'
-alias gaa='git add .'
-alias gaaa='git add --all'
-alias gau='git add --update'
-alias gb='git branch'
-alias gbd='git branch --delete '
+alias gst='git status'
 alias gc='git commit'
-alias gcm='git commit --message'
-alias gcf='git commit --fixup'
 alias gco='git checkout'
-alias gcob='git checkout -b'
-alias gcom='git checkout master'
-alias gcos='git checkout staging'
-alias gcod='git checkout develop'
-alias gd='git diff'
-alias gda='git diff HEAD'
-alias gi='git init'
-alias glg='git log --graph --oneline --decorate --all'
-alias gld='git log --pretty=format:"%h %ad %s" --date=short --all'
-alias gm='git merge --no-ff'
-alias gma='git merge --abort'
-alias gmc='git merge --continue'
-alias gp='git pull'
-alias gpr='git pull --rebase'
-alias gr='git rebase'
-alias gs='git status'
-alias gss='git status --short'
-alias gst='git stash'
-alias gsta='git stash apply'
-alias gstd='git stash drop'
-alias gstl='git stash list'
-alias gstp='git stash pop'
-alias gsts='git stash save'
+alias gl='git pull'
+alias gpom="git pull origin master"
+alias gp='git push'
+alias gd='git diff | mate'
+alias gb='git branch'
+alias gba='git branch -a'
+alias del='git branch -d'
+
+# Git Flow
+alias ffs='git flow feature start'
+alias fff='git flow feature finish'
+
+# ngrok
+alias ngrok='./ngrok'

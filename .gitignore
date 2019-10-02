@@ -1,0 +1,8 @@
+/*
+*/
+!ngrok
+!.zshrc
+!.gitignore
+!.gitignore_global
+!README.MD
+!.oh-my-zsh/Makefile
