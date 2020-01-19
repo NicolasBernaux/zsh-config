@@ -43,7 +43,7 @@ get-plugins: ## Get the differents plugins
 
 
 .PHONY: get-themes
-get-theme: ## Get themes
+get-themes: ## Get themes
 	@echo ----------------------------------------------------------------
 	@echo '📦  Get spaceship'
 	@echo ----------------------------------------------------------------
@@ -58,7 +58,7 @@ get-theme: ## Get themes
 	@echo ----------------------------------------------------------------
 
 .PHONY: install-oh-my-zsh
-install: ## install
+install-oh-my-zsh: ## install
 	git init
 	git remote add origin https://github.com/robbyrussell/oh-my-zsh.git
 	git pull origin	master
