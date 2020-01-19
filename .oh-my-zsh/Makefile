@@ -49,7 +49,7 @@ get-themes: ## Get themes
 	@echo ----------------------------------------------------------------
 
 	rm -rf custom/themes/spaceship-promp custom/themes/spaceship.zsh-theme
-	git clone https://github.com/denysdovhan/spaceship-prompt.git custom/themes/spaceship-promp
+	git clone https://github.com/maximbaz/spaceship-prompt.git custom/themes/spaceship-promp
 	ln -s custom/themes/spaceship-prompt/spaceship.zsh-theme custom/themes/spaceship.zsh-theme
 
 

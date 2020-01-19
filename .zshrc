@@ -11,7 +11,7 @@ export HOME="/Users/$USER/"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="spaceship"
+ZSH_THEME="spaceship"
 
 
 # Set list of themes to pick from when loading at random
@@ -79,6 +79,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-z
+    zsh-async
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -101,7 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 
-# Set Spaceship ZSH as a prompt
+# Spaceship config
 autoload -U promptinit; promptinit
 prompt spaceship
 
