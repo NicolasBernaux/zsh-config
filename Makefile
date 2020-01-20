@@ -14,6 +14,7 @@ get-plugins: ## Get the differents plugins
 
 	rm -rf custom/plugins/symfony-console
 	git clone https://github.com/mnapoli/zsh-symfony-console-plugin.git custom/plugins/symfony-console
+
 	@echo ----------------------------------------------------------------
 	@echo '📦  Get zsh-zsh-autosuggestions'
 	@echo ----------------------------------------------------------------
@@ -57,6 +58,8 @@ get-themes: ## Get themes
 	@echo '🎉  themes installed'
 	@echo ----------------------------------------------------------------
 
+
+
 .PHONY: install-oh-my-zsh
 install-oh-my-zsh: ## install
 	git init
@@ -66,6 +69,20 @@ install-oh-my-zsh: ## install
 	@echo ---------------------------------------------------------------- 
 	@echo '🎉  You are now ready'
 	@echo ----------------------------------------------------------------
+
+
+
+.PHONY: set-global-gitignore
+set-global-gitignore: ## Show a list of available commands
+    @echo ---------------------------------------------------------------- 
+    @echo '🙈  Set global gitignore'
+    @echo ----------------------------------------------------------------
+
+    git config --global core.excludesfile ~/.gitignore_global
+    
+    @echo ---------------------------------------------------------------- 
+    @echo '🎉  Global gitignore set'
+    @echo ----------------------------------------------------------------
 
 
 

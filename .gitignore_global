@@ -1,4 +1,21 @@
-*~
+# Node
+npm-debug.log
+
+# Mac
 .DS_Store
+
+# Windows
+Thumbs.db
+
+# Jetbrains
 .idea/
+
+# VSCode
 .vscode
+
+# vi
+*~
+
+# General
+log/
+*.log
