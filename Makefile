@@ -74,15 +74,23 @@ install-oh-my-zsh: ## install
 
 .PHONY: set-global-gitignore
 set-global-gitignore: ## Set a global gitignore
-    @echo ---------------------------------------------------------------- 
-    @echo '🙈  Set global gitignore'
-    @echo ----------------------------------------------------------------
+	@echo ---------------------------------------------------------------- 
+	@echo '🙈  Set global gitignore'
+	@echo ----------------------------------------------------------------
 
-    git config --global core.excludesfile ~/.gitignore_global
-    
-    @echo ---------------------------------------------------------------- 
-    @echo '🎉  Global gitignore set'
-    @echo ----------------------------------------------------------------
+	git config --global core.excludesfile ~/.gitignore_global
+
+	@echo ---------------------------------------------------------------- 
+	@echo '🎉  Global gitignore set'
+	@echo ----------------------------------------------------------------
+
+
+
+.PHONY: create-zshrc
+create-zshrc: ## Create .zshrc from .zshrc.example
+	@echo ---------------------------------------------------------------- 
+	sed 's/USER_NAME/$(user)/g' .zshrc.example > .zshrc
+	@echo ----------------------------------------------------------------
 
 
 

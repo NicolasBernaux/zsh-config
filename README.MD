@@ -11,6 +11,9 @@
 Clone the repo in your `~/` directory
  - run `git clone https://github.com/NicolasBernaux/my-config.git`
 
+Create .zshrc with your mac user name
+ - run `make user="YOUR_USER_NAME" create-zshrc`
+
 Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
  - run `make install-oh-my-zsh`
 
