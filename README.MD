@@ -23,5 +23,8 @@ Install plugins
 Install themes
  - run `make get-themes`
 
+Set global gitignore
+ - run `make set-global-gitignore`
+
 
 #### Then enjoy
