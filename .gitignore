@@ -1,7 +1,7 @@
 /*
 */
 !ngrok
-!.zshrc
+!.zshrc.example
 !.gitignore
 !.gitignore_global
 !README.MD

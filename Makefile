@@ -73,7 +73,7 @@ install-oh-my-zsh: ## install
 
 
 .PHONY: set-global-gitignore
-set-global-gitignore: ## Show a list of available commands
+set-global-gitignore: ## Set a global gitignore
     @echo ---------------------------------------------------------------- 
     @echo '🙈  Set global gitignore'
     @echo ----------------------------------------------------------------
