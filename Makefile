@@ -44,13 +44,13 @@ get-plugins: ## Get the differents plugins
 	git clone https://github.com/mafredri/zsh-async.git .oh-my-zsh/custom/plugins/async
 
 	@echo ----------------------------------------------------------------
-	@echo '📦  Get zsh-async'
+	@echo '📦  Get theFuck'
 	@echo ----------------------------------------------------------------
 	
 	brew install thefuck
 
 	@echo ----------------------------------------------------------------
-	@echo '🎉  plugins installed'
+	@echo '🎉  Plugins installed'
 	@echo ----------------------------------------------------------------
 
 
@@ -58,7 +58,7 @@ get-plugins: ## Get the differents plugins
 .PHONY: get-themes
 get-themes: ## Get themes
 	@echo ----------------------------------------------------------------
-	@echo '📦  Get spaceship'
+	@echo '📦  Get spaceship prompt'
 	@echo ----------------------------------------------------------------
 
 	rm -rf .oh-my-zsh/custom/themes/spaceship-prompt .oh-my-zsh/custom/themes/spaceship.zsh-theme
@@ -67,19 +67,34 @@ get-themes: ## Get themes
 
 
 	@echo ----------------------------------------------------------------
-	@echo '🎉  themes installed'
+	@echo '🎉  Themes installed'
 	@echo ----------------------------------------------------------------
 
 
 
 .PHONY: install-oh-my-zsh
-install-oh-my-zsh: ## install
+install-oh-my-zsh: ## install oh my zsh
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get oh-my-zsh'
+	@echo ----------------------------------------------------------------
 	git init
 	git remote add origin https://github.com/robbyrussell/oh-my-zsh.git ./.oh-my-zsh
 	git pull origin	master
 	rm -rf .gitignore
 	@echo ---------------------------------------------------------------- 
 	@echo '🎉  You are now ready'
+	@echo ----------------------------------------------------------------
+
+
+
+.PHONY: install-docker
+install-docker: ## install docker
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get docker'
+	@echo ----------------------------------------------------------------
+	brew install docker docker-compose docker-machine xhyve docker-machine-driver-xhyve
+	@echo ---------------------------------------------------------------- 
+	@echo '🎉  Docker installed'
 	@echo ----------------------------------------------------------------
 
 
@@ -101,7 +116,12 @@ set-global-gitignore: ## Set a global gitignore
 .PHONY: create-zshrc
 create-zshrc: ## Create .zshrc from .zshrc.example
 	@echo ---------------------------------------------------------------- 
+	@echo '🗂  Create .zshrc'
+	@echo ----------------------------------------------------------------
+
 	sed 's/USER_NAME/$(user)/g' .zshrc.example > .zshrc
+	@echo ---------------------------------------------------------------- 
+	@echo '🚀  zshrc created'
 	@echo ----------------------------------------------------------------
 
 
