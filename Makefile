@@ -87,12 +87,29 @@ install-oh-my-zsh: ## install oh my zsh
 
 
 
-.PHONY: install-docker
-install-docker: ## install docker
+.PHONY: install-packages
+install-packages: ## install packages
 	@echo ----------------------------------------------------------------
-	@echo '📦  Get docker'
+	@echo '📦  Install Homebrew'
 	@echo ----------------------------------------------------------------
-	brew install docker docker-compose docker-machine xhyve docker-machine-driver-xhyve
+
+	/usr/bin/ruby -e "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew -v
+
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get Node'
+	@echo ----------------------------------------------------------------
+
+	brew install node
+	node -v
+
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get Composer'
+	@echo ----------------------------------------------------------------
+
+	brew install composer
+	composer -v
+
 	@echo ---------------------------------------------------------------- 
 	@echo '🎉  Docker installed'
 	@echo ----------------------------------------------------------------
@@ -134,4 +151,3 @@ help: ## Show a list of available commands
 		sort |\
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo
-
