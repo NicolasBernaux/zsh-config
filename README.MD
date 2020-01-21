@@ -1,11 +1,10 @@
 # MY DEFAULT CONFIG
-A zsh config to init your terminal in 2 minutes.
-
+A lightweight config to configure your terminal in 1 minute using [spaceship prompt](https://github.com/maximbaz/spaceship-prompt.git) 🚀.
+![spaceship prompt](https://user-images.githubusercontent.com/10276208/36086434-5de52ace-0ff2-11e8-8299-c67f9ab4e9bd.gif "Spaceship prompt")
 
 ## Getting Started
 
 ### Prerequisites
-- A Unix-like operating system: macOS, Linux, BSD. On Windows: WSL is preferred, but cygwin or msys also mostly work.
 - [Zsh](https://www.zsh.org) should be installed (v4.3.9 or more recent). If not pre-installed (run `zsh --version` to confirm), check the following instructions here: [Installing ZSH](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH)
 - `git` should be installed
 
