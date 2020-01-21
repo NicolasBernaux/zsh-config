@@ -1,11 +1,13 @@
 # MY DEFAULT CONFIG
+A zsh config to init your terminal in 2 minutes.
+
 
 ## Getting Started
 
 ### Prerequisites
-* A Unix-like operating system: macOS, Linux, BSD. On Windows: WSL is preferred, but cygwin or msys also mostly work.
-* [Zsh](https://www.zsh.org) should be installed (v4.3.9 or more recent). If not pre-installed (run `zsh --version` to confirm), check the following instructions here: [Installing ZSH](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH)
-* `git` should be installed
+- A Unix-like operating system: macOS, Linux, BSD. On Windows: WSL is preferred, but cygwin or msys also mostly work.
+- [Zsh](https://www.zsh.org) should be installed (v4.3.9 or more recent). If not pre-installed (run `zsh --version` to confirm), check the following instructions here: [Installing ZSH](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH)
+- `git` should be installed
 
 ### Repo installation
 Clone the repo in your `~/` directory
@@ -27,4 +29,11 @@ Set global gitignore
  - run `make set-global-gitignore`
 
 
-#### Then enjoy
+
+### Dependencies
+ - [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+ - [spaceship async prompt](https://github.com/maximbaz/spaceship-prompt.git)
+ - [symfony console](https://github.com/mnapoli/zsh-symfony-console-plugin.git)
+ - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions.git)
+ - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting.git)
+ - [zsh-z](https://github.com/agkozak/zsh-z.git)
