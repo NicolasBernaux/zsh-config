@@ -12,30 +12,42 @@ get-plugins: ## Get the differents plugins
 	@echo '📦  Get zsh-symfony-console'
 	@echo ----------------------------------------------------------------
 
-	rm -rf custom/plugins/symfony-console
-	git clone https://github.com/mnapoli/zsh-symfony-console-plugin.git custom/plugins/symfony-console
+	rm -rf .oh-my-zsh/custom/plugins/symfony-console
+	git clone https://github.com/mnapoli/zsh-symfony-console-plugin.git .oh-my-zsh/custom/plugins/symfony-console
 
 	@echo ----------------------------------------------------------------
 	@echo '📦  Get zsh-zsh-autosuggestions'
 	@echo ----------------------------------------------------------------
 
-	rm -rf custom/plugins/zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git custom/plugins/zsh-autosuggestions
+	rm -rf .oh-my-zsh/custom/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-autosuggestions.git .oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 	@echo ----------------------------------------------------------------
 	@echo '📦  Get zsh-syntax-highlighting'
 	@echo ----------------------------------------------------------------
 
-	rm -rf custom/plugins/zsh-syntax-highlighting
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git custom/plugins/zsh-syntax-highlighting
+	rm -rf .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 	@echo ----------------------------------------------------------------
-	@echo '📦  Get zsh-autosuggestions'
+	@echo '📦  Get zsh-z'
 	@echo ----------------------------------------------------------------
 
-	rm -rf custom/plugins/zsh-z
-	git clone https://github.com/agkozak/zsh-z.git custom/plugins/zsh-z
+	rm -rf .oh-my-zsh/custom/plugins/zsh-z
+	git clone https://github.com/agkozak/zsh-z.git .oh-my-zsh/custom/plugins/zsh-z
 
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get zsh-async'
+	@echo ----------------------------------------------------------------
+
+	rm -rf .oh-my-zsh/custom/plugins/async
+	git clone https://github.com/mafredri/zsh-async.git .oh-my-zsh/custom/plugins/async
+
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get zsh-async'
+	@echo ----------------------------------------------------------------
+	
+	brew install thefuck
 
 	@echo ----------------------------------------------------------------
 	@echo '🎉  plugins installed'
@@ -49,9 +61,9 @@ get-themes: ## Get themes
 	@echo '📦  Get spaceship'
 	@echo ----------------------------------------------------------------
 
-	rm -rf custom/themes/spaceship-promp custom/themes/spaceship.zsh-theme
-	git clone https://github.com/maximbaz/spaceship-prompt.git custom/themes/spaceship-promp
-	ln -s custom/themes/spaceship-prompt/spaceship.zsh-theme custom/themes/spaceship.zsh-theme
+	rm -rf .oh-my-zsh/custom/themes/spaceship-prompt .oh-my-zsh/custom/themes/spaceship.zsh-theme
+	git clone https://github.com/maximbaz/spaceship-prompt.git .oh-my-zsh/custom/themes/spaceship-prompt
+	ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 
 
 	@echo ----------------------------------------------------------------
@@ -63,7 +75,7 @@ get-themes: ## Get themes
 .PHONY: install-oh-my-zsh
 install-oh-my-zsh: ## install
 	git init
-	git remote add origin https://github.com/robbyrussell/oh-my-zsh.git
+	git remote add origin https://github.com/robbyrussell/oh-my-zsh.git ./.oh-my-zsh
 	git pull origin	master
 	rm -rf .gitignore
 	@echo ---------------------------------------------------------------- 

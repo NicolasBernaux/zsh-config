@@ -79,7 +79,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-z
-    zsh-async
+    async
 )
 
 source $ZSH/oh-my-zsh.sh
