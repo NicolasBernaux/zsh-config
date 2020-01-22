@@ -6,6 +6,79 @@
 LOCALDATE := $(shell date +'%Y%m%d-%H%M')
 
 
+.PHONY: get-packages
+get-packages: ## Get packages
+	@echo ----------------------------------------------------------------
+	@echo '📦  Install Homebrew'
+	@echo ----------------------------------------------------------------
+
+	# If brew -v return this will install brew
+	brew -v || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get Node'
+	@echo ----------------------------------------------------------------
+
+	node -v || brew install node
+
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get Composer'
+	@echo ----------------------------------------------------------------
+
+	composer -v || brew install composer
+
+	@echo ---------------------------------------------------------------- 
+	@echo '🎉  Docker installed'
+	@echo ----------------------------------------------------------------
+
+
+
+.PHONY: create-zshrc
+create-zshrc: ## Create .zshrc from .zshrc.example
+	@echo ---------------------------------------------------------------- 
+	@echo '🗂  Create .zshrc'
+	@echo ----------------------------------------------------------------
+
+	sed 's/USER_NAME/$(user)/g' .zshrc.example > .zshrc
+	@echo ---------------------------------------------------------------- 
+	@echo '🚀  zshrc created'
+	@echo ----------------------------------------------------------------
+
+
+
+.PHONY: get-oh-my-zsh
+get-oh-my-zsh: ## Get oh my zsh
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get oh-my-zsh'
+	@echo ----------------------------------------------------------------
+
+	@if [ ! -d "./.oh-my-zsh/" ]; then\
+		git clone https://github.com/robbyrussell/oh-my-zsh.git ./.oh-my-zsh;\
+	fi
+	
+	@echo ---------------------------------------------------------------- 
+	@echo '🎉  You are now ready'
+	@echo ----------------------------------------------------------------
+
+
+
+.PHONY: get-themes
+get-themes: ## Get themes
+	@echo ----------------------------------------------------------------
+	@echo '📦  Get spaceship prompt'
+	@echo ----------------------------------------------------------------
+
+	rm -rf .oh-my-zsh/custom/themes/spaceship-prompt .oh-my-zsh/custom/themes/spaceship.zsh-theme
+	git clone https://github.com/maximbaz/spaceship-prompt.git .oh-my-zsh/custom/themes/spaceship-prompt
+	ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+
+
+	@echo ----------------------------------------------------------------
+	@echo '🎉  Themes installed'
+	@echo ----------------------------------------------------------------
+
+
+
 .PHONY: get-plugins
 get-plugins: ## Get the differents plugins
 	@echo ----------------------------------------------------------------
@@ -47,71 +120,10 @@ get-plugins: ## Get the differents plugins
 	@echo '📦  Get theFuck'
 	@echo ----------------------------------------------------------------
 	
-	brew install thefuck
+	fuck -v || brew install thefuck
 
 	@echo ----------------------------------------------------------------
 	@echo '🎉  Plugins installed'
-	@echo ----------------------------------------------------------------
-
-
-
-.PHONY: get-themes
-get-themes: ## Get themes
-	@echo ----------------------------------------------------------------
-	@echo '📦  Get spaceship prompt'
-	@echo ----------------------------------------------------------------
-
-	rm -rf .oh-my-zsh/custom/themes/spaceship-prompt .oh-my-zsh/custom/themes/spaceship.zsh-theme
-	git clone https://github.com/maximbaz/spaceship-prompt.git .oh-my-zsh/custom/themes/spaceship-prompt
-	ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
-
-
-	@echo ----------------------------------------------------------------
-	@echo '🎉  Themes installed'
-	@echo ----------------------------------------------------------------
-
-
-
-.PHONY: install-oh-my-zsh
-install-oh-my-zsh: ## install oh my zsh
-	@echo ----------------------------------------------------------------
-	@echo '📦  Get oh-my-zsh'
-	@echo ----------------------------------------------------------------
-	git init
-	git remote add origin https://github.com/robbyrussell/oh-my-zsh.git ./.oh-my-zsh
-	git pull origin	master
-	rm -rf .gitignore
-	@echo ---------------------------------------------------------------- 
-	@echo '🎉  You are now ready'
-	@echo ----------------------------------------------------------------
-
-
-
-.PHONY: install-packages
-install-packages: ## install packages
-	@echo ----------------------------------------------------------------
-	@echo '📦  Install Homebrew'
-	@echo ----------------------------------------------------------------
-
-	/usr/bin/ruby -e "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew -v
-
-	@echo ----------------------------------------------------------------
-	@echo '📦  Get Node'
-	@echo ----------------------------------------------------------------
-
-	brew install node
-	node -v
-
-	@echo ----------------------------------------------------------------
-	@echo '📦  Get Composer'
-	@echo ----------------------------------------------------------------
-
-	brew install composer
-	composer -v
-
-	@echo ---------------------------------------------------------------- 
-	@echo '🎉  Docker installed'
 	@echo ----------------------------------------------------------------
 
 
@@ -123,22 +135,28 @@ set-global-gitignore: ## Set a global gitignore
 	@echo ----------------------------------------------------------------
 
 	git config --global core.excludesfile ~/.gitignore_global
-
+	
 	@echo ---------------------------------------------------------------- 
 	@echo '🎉  Global gitignore set'
 	@echo ----------------------------------------------------------------
 
 
 
-.PHONY: create-zshrc
-create-zshrc: ## Create .zshrc from .zshrc.example
+.PHONY: init
+init: ## Create .zshrc from .zshrc.example
 	@echo ---------------------------------------------------------------- 
-	@echo '🗂  Create .zshrc'
+	@echo '🗂  Init'
 	@echo ----------------------------------------------------------------
+	
+	make get-packages
+	make user=$(user) create-zshrc
+	make get-oh-my-zsh
+	make get-themes
+	make get-plugins
+	make set-global-gitignore
 
-	sed 's/USER_NAME/$(user)/g' .zshrc.example > .zshrc
 	@echo ---------------------------------------------------------------- 
-	@echo '🚀  zshrc created'
+	@echo '🚀  You are ready'
 	@echo ----------------------------------------------------------------
 
 
