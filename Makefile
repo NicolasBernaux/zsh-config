@@ -10,7 +10,7 @@ LOCALDATE := $(shell date +'%Y%m%d-%H%M')
 
 .PHONY: get-packages create-zshrc get-oh-my-zsh get-themes get-plugins set-global-gitignore init help
 
-get-packages: ## Installer les paquets de base (Brew, Node, Composer)
+get-packages: ## Installer les paquets de base (Brew, Node, Composer, Zoxide)
 	@echo
 	@printf '\033[35m 📦  Get Packages :\033[0m\n'
 	@echo ----------------------------------------------------------------
@@ -24,14 +24,21 @@ get-packages: ## Installer les paquets de base (Brew, Node, Composer)
 	@printf '\033[36m 📦  Install Composer :\033[0m\n'
 	@command -v composer >/dev/null 2>&1 || brew install composer
 	@echo
+	@printf '\033[36m 📦  Install Zoxide :\033[0m\n'
+	@command -v zoxide >/dev/null 2>&1 || brew install zoxide
+	@echo
 	@printf '\033[92m 📦   Packages vérifiés/installés \033[0m\n'
 	@echo
 
-create-zshrc: ## Créer .zshrc à partir de .zshrc.example
+create-zshrc: ## Créer .zshrc à partir de .zshrc.example (avec sauvegarde)
 	@echo
 	@printf '\033[35m  🗂  Create .zshrc  :\033[0m\n'
 	@echo ----------------------------------------------------------------
 	@echo
+	@if [ -f .zshrc ]; then \
+		cp .zshrc .zshrc.bak_$(LOCALDATE); \
+		printf '\033[33m ⚠️  Sauvegarde de l'\''ancien .zshrc dans .zshrc.bak_$(LOCALDATE)\033[0m\n'; \
+	fi
 	sed 's/USER_NAME/$(user)/g' .zshrc.example > .zshrc
 	@echo
 	@printf '\033[92m 🚀  .zshrc créé pour l'\''utilisateur : $(user) \033[0m\n'
@@ -42,7 +49,7 @@ get-oh-my-zsh: ## Installer Oh My Zsh
 	@printf '\033[35m 📦  Get Oh My Zsh :\033[0m\n'
 	@echo ----------------------------------------------------------------
 	@if [ ! -d "./.oh-my-zsh/" ]; then \
-		git clone https://github.com/ohmyzsh/ohmyzsh.git ./.oh-my-zsh; \
+		git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git ./.oh-my-zsh; \
 	fi
 	@echo
 	@printf '\033[92m 🚀  Oh My Zsh installé \033[0m\n'
@@ -55,7 +62,7 @@ get-themes: ## Installer les thèmes Zsh
 	@echo
 	@printf '\033[36m 📦  Install Spaceship Prompt :\033[0m\n'
 	rm -rf .oh-my-zsh/custom/themes/spaceship-prompt .oh-my-zsh/custom/themes/spaceship.zsh-theme
-	git clone https://github.com/spaceship-prompt/spaceship-prompt.git .oh-my-zsh/custom/themes/spaceship-prompt --depth=1
+	git clone --depth=1 https://github.com/spaceship-prompt/spaceship-prompt.git .oh-my-zsh/custom/themes/spaceship-prompt
 	ln -s .oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme .oh-my-zsh/custom/themes/spaceship.zsh-theme
 	@echo
 	@printf '\033[92m 🎉  Thèmes installés \033[0m\n'
@@ -68,23 +75,19 @@ get-plugins: ## Installer les plugins Zsh
 	@echo
 	@printf '\033[36m 📦  Install Zsh Symfony Console :\033[0m\n'
 	rm -rf .oh-my-zsh/custom/plugins/symfony-console
-	git clone https://github.com/mnapoli/zsh-symfony-console-plugin.git .oh-my-zsh/custom/plugins/symfony-console
+	git clone --depth=1 https://github.com/mnapoli/zsh-symfony-console-plugin.git .oh-my-zsh/custom/plugins/symfony-console
 	@echo
 	@printf '\033[36m 📦  Install Zsh Autosuggestions :\033[0m\n'
 	rm -rf .oh-my-zsh/custom/plugins/zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-autosuggestions.git .oh-my-zsh/custom/plugins/zsh-autosuggestions
+	git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git .oh-my-zsh/custom/plugins/zsh-autosuggestions
 	@echo
 	@printf '\033[36m 📦  Install Zsh Syntax Highlighting :\033[0m\n'
 	rm -rf .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-	@echo
-	@printf '\033[36m 📦  Install Zsh Z :\033[0m\n'
-	rm -rf .oh-my-zsh/custom/plugins/zsh-z
-	git clone https://github.com/agkozak/zsh-z.git .oh-my-zsh/custom/plugins/zsh-z
+	git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	@echo
 	@printf '\033[36m 📦  Install Zsh Async :\033[0m\n'
 	rm -rf .oh-my-zsh/custom/plugins/async
-	git clone https://github.com/mafredri/zsh-async.git .oh-my-zsh/custom/plugins/async
+	git clone --depth=1 https://github.com/mafredri/zsh-async.git .oh-my-zsh/custom/plugins/async
 	@echo
 	@printf '\033[36m 📦  Install TheFuck :\033[0m\n'
 	@command -v fuck >/dev/null 2>&1 || brew install thefuck
@@ -97,13 +100,17 @@ set-global-gitignore: ## Configurer un gitignore global
 	@printf '\033[35m 🙈  Set global gitignore :\033[0m\n'
 	@echo ----------------------------------------------------------------
 	@echo
+	@touch ~/.gitignore_global
 	git config --global core.excludesfile ~/.gitignore_global
 	@echo
-	@printf '\033[92m 🎉  Global gitignore configuré \033[0m\n'
+	@printf '\033[92m 🎉  Global gitignore configuré (~/.gitignore_global) \033[0m\n'
 	@echo
 
 init: get-packages create-zshrc get-oh-my-zsh get-themes get-plugins set-global-gitignore ## Initialiser tout l'environnement
 	@printf '\033[1;93m  🚀  Tout est prêt ! 🚀\033[0m\n'
+	@echo
+	@printf '\033[33m 💡 Pense à ajouter cette ligne dans ton .zshrc.example pour zoxide :\033[0m\n'
+	@printf '\033[36m    eval "$$(zoxide init zsh)"\033[0m\n'
 	@echo
 
 help: ## Afficher cette aide
